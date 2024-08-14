@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $email
@@ -87,5 +87,9 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+    public function permissions()
+    {
+        return $this->role->permissions->pluck('name');
     }
 }

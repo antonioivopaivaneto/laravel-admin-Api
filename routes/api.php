@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\api\OrderController;
+use App\Http\Controllers\api\PermissionController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
@@ -19,10 +20,12 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::put('users/info',[UserController::class,'updateInfo']);
     Route::put('users/password',[UserController::class,'updatePassword']);
     Route::post('upload',[ImageController::class,'upload']);
+    Route::get('export',[OrderController::class,'export']);
 
     Route::apiResource('/users',UserController::class );
     Route::apiResource('/roles',RoleController::class );
     Route::apiResource('/products',ProductController::class );
     Route::apiResource('/orders',OrderController::class )->only('index','show');
+    Route::apiResource('/permissions',PermissionController::class )->only('index');
 });
 
