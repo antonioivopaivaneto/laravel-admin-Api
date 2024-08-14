@@ -3,19 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(UserRegisterRequest $request)
     {
-        $formData = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
+        $formData = $request->validated();
+
 
         $formData['password'] = bcrypt($request->password);
 
