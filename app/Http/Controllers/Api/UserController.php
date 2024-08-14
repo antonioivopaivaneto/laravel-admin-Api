@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\updateInfoRequest;
 use App\Http\Requests\updatePasswordRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -17,7 +18,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::paginate(10);
+        $user = User::paginate(10);
+
+        return  UserResource::collection($user);
     }
 
     /**
@@ -29,10 +32,11 @@ class UserController extends Controller
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
             'first_name' => $request->get('first_name'),
+            'role_id' => $request->get('role_id'),
             'password' => bcrypt($request->get('password')),
         ]);
 
-        return response(Response::HTTP_CREATED);
+        return response( new UserResource($user),Response::HTTP_CREATED);
     }
 
     /**
@@ -40,7 +44,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return  User::find($id);
+        $user = User::find($id);
+
+        return new UserResource($user);
     }
 
     /**
@@ -50,9 +56,9 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        $user->update($request->only('first_name','last_name','email'));
+        $user->update($request->only('first_name','last_name','email','role_id'));
 
-        return Response(Response::HTTP_OK);
+        return Response( new UserResource($user), Response::HTTP_OK);
     }
 
     /**
@@ -72,7 +78,8 @@ class UserController extends Controller
      */
     public function user(){
 
-        return Auth::user();
+         return new UserResource(Auth::user());
+
     }
 
     /**
@@ -82,9 +89,9 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $user->update($request->only('first_name','last_name','email'));
+        $user->update($request->only('first_name','last_name','email','role_id'));
 
-        return Response($user,Response::HTTP_ACCEPTED);
+        return Response(new UserResource($user),Response::HTTP_ACCEPTED);
     }
     /**
      * update the user authentication information
@@ -97,7 +104,7 @@ class UserController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-        return Response($user,Response::HTTP_ACCEPTED);
+        return Response(new UserResource($user),Response::HTTP_ACCEPTED);
     }
 
 
