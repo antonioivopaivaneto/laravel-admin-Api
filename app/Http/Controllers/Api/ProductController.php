@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductCreateRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Storage;
@@ -18,6 +19,8 @@ class ProductController extends Controller
      */
     public function index()
     {
+        Gate::authorize('view','products');
+
         $products = Product::paginate(10);
         return ProductResource::collection($products);
     }
@@ -27,6 +30,8 @@ class ProductController extends Controller
      */
     public function store(ProductCreateRequest $request)
     {
+        Gate::authorize('edit','products');
+
 
 
 
@@ -41,6 +46,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
+        Gate::authorize('view','products');
+
         $product = Product::find($id);
         return new  ProductResource($product);
     }
@@ -49,6 +56,8 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
+
+        Gate::authorize('edit','products');
 
 
         $product = product::find($id);
@@ -64,6 +73,8 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
+        Gate::authorize('edit','products');
+
         Product::destroy($id);
 
         return response(null, Response::HTTP_NO_CONTENT);

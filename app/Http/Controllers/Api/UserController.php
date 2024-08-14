@@ -8,6 +8,7 @@ use App\Http\Requests\updatePasswordRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Auth;
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -18,6 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        Gate::authorize('view','users');
+
         $user = User::paginate(10);
 
         return  UserResource::collection($user);
@@ -28,6 +31,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('edit','users');
+
         $user = User::create([
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
@@ -44,6 +49,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
+        Gate::authorize('view','users');
+
         $user = User::find($id);
 
         return new UserResource($user);
@@ -54,6 +61,8 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        Gate::authorize('edit','users');
+
         $user = User::find($id);
 
         $user->update($request->only('first_name','last_name','email','role_id'));
@@ -66,6 +75,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+        Gate::authorize('edit','users');
+
         $user = User::find($id);
 
         $user->destroy();
