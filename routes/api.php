@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\PermissionController;
@@ -16,6 +17,7 @@ Route::post('register',[AuthController::class,'register'])->name('register');
 Route::post('login',[AuthController::class,'login'])->name('login');
 
 Route::group(['middleware' => 'auth:api'], function() {
+    Route::get('chart',[DashboardController::class,'chart'])->name('chart');
     Route::get('user',[UserController::class,'user'])->name('user');
     Route::put('users/info',[UserController::class,'updateInfo']);
     Route::put('users/password',[UserController::class,'updatePassword']);
