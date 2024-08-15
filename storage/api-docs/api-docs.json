@@ -8,6 +8,9 @@
     "paths": {
         "/api/users": {
             "get": {
+                "tags": [
+                    "Users"
+                ],
                 "summary": "Get Users",
                 "description": "Retrieve a paginated list of users.",
                 "operationId": "566aed8efb436ca506e0ef51a032ecd9",
@@ -50,6 +53,9 @@
                 ]
             },
             "post": {
+                "tags": [
+                    "Users"
+                ],
                 "summary": "Create a new user",
                 "description": "Create a new user with specified details.",
                 "operationId": "be551c1d694a01c164966f58bfa77013",
@@ -87,6 +93,9 @@
         },
         "/api/users/{id}": {
             "get": {
+                "tags": [
+                    "Users"
+                ],
                 "summary": "Show User",
                 "description": "Retrieve a single user by ID.",
                 "operationId": "6f51bd5fa2dddcd25e44cfa53dcbd10a",
@@ -123,6 +132,9 @@
                 ]
             },
             "put": {
+                "tags": [
+                    "Users"
+                ],
                 "summary": "Update User",
                 "description": "Update user details by ID.",
                 "operationId": "070e37fc9aff78ae73860751bc990ed3",
@@ -191,6 +203,9 @@
                 ]
             },
             "delete": {
+                "tags": [
+                    "Users"
+                ],
                 "summary": "Delete User",
                 "description": "Delete a user by ID.",
                 "operationId": "0b4133ed462528a5e648b88ead11e929",
@@ -222,6 +237,9 @@
         },
         "/api/user": {
             "get": {
+                "tags": [
+                    "Profile"
+                ],
                 "summary": "Get authenticated user",
                 "description": "Retrieve the currently authenticated user.",
                 "operationId": "fd8e4e27fd1a9e98a6638cec7e2126ca",
@@ -246,6 +264,9 @@
         },
         "/api/user/info": {
             "put": {
+                "tags": [
+                    "Profile"
+                ],
                 "summary": "Update user information",
                 "description": "Update the authenticated user's information.",
                 "operationId": "96af1e0d1f720f5395533b025cbcb9b1",
@@ -302,6 +323,9 @@
         },
         "/api/user/password": {
             "put": {
+                "tags": [
+                    "Profile"
+                ],
                 "summary": "Update user password",
                 "description": "Update the authenticated user's password.",
                 "operationId": "f0598ccf9b10c1c1e00f532bbcad0fba",
@@ -423,5 +447,15 @@
                 "scheme": "bearer"
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Users",
+            "description": "Users"
+        },
+        {
+            "name": "Profile",
+            "description": "Profile"
+        }
+    ]
 }

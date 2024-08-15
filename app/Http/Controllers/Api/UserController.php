@@ -33,6 +33,7 @@ class UserController extends Controller
      * @OA\Get(
      *     path="/api/users",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Users"},     *
      *     summary="Get Users",
      *     description="Retrieve a paginated list of users.",
      *     @OA\Parameter(
@@ -72,6 +73,7 @@ class UserController extends Controller
      * @OA\Post(
      *     path="/api/users",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Users"},
      *     summary="Create a new user",
      *     description="Create a new user with specified details.",
      *     @OA\RequestBody(
@@ -108,6 +110,7 @@ class UserController extends Controller
      * @OA\Get(
      *     path="/api/users/{id}",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Users"},
      *     summary="Show User",
      *     description="Retrieve a single user by ID.",
      *     @OA\Parameter(
@@ -143,6 +146,7 @@ class UserController extends Controller
      * @OA\Put(
      *     path="/api/users/{id}",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Users"},
      *     summary="Update User",
      *     description="Update user details by ID.",
      *     @OA\Parameter(
@@ -211,6 +215,7 @@ class UserController extends Controller
      * @OA\Delete(
      *     path="/api/users/{id}",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Users"},
      *     summary="Delete User",
      *     description="Delete a user by ID.",
      *     @OA\Parameter(
@@ -247,6 +252,7 @@ class UserController extends Controller
      * @OA\Get(
      *     path="/api/user",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Profile"},
      *     summary="Get authenticated user",
      *     description="Retrieve the currently authenticated user.",
      *     @OA\Response(
@@ -271,6 +277,7 @@ class UserController extends Controller
      * @OA\Put(
      *     path="/api/user/info",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Profile"},
      *     summary="Update user information",
      *     description="Update the authenticated user's information.",
      *     @OA\RequestBody(
@@ -324,6 +331,7 @@ class UserController extends Controller
      * @OA\Put(
      *     path="/api/user/password",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Profile"},
      *     summary="Update user password",
      *     description="Update the authenticated user's password.",
      *     @OA\RequestBody(
