@@ -5,11 +5,16 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\User;
+use Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class AuthController extends Controller
 {
+
+
+
     public function register(UserRegisterRequest $request)
     {
         $formData = $request->validated();
@@ -38,10 +43,13 @@ class AuthController extends Controller
         {
             $token = Auth::user()->createToken('passportToken')->accessToken;
 
+            $cookie = Cookie('jwt',$token,3600);
+
+
             return response()->json([
                 'user' => Auth::user(),
                 'token' => $token
-            ],200);
+            ],200)->withCookie($cookie);
 
         }
 
@@ -49,5 +57,14 @@ class AuthController extends Controller
             'error' => 'Unauthorize'
         ],401);
 
+    }
+
+    public function logout()
+    {
+        $cookie = Cookie::forget('jwt');
+
+        return response()->json([
+            'message' => 'success',
+        ])->withCookie($cookie);
     }
 }
